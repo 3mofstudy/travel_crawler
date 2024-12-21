@@ -1,0 +1,5 @@
+# 排除 google-sheet-api-token.json
+Project/google-sheet-api-token.json
+
+# 排除 pycache 資料夾
+__pycache__/
