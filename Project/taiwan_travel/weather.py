@@ -1,6 +1,6 @@
 import requests  # 啟用requests模組，用於發送HTTP請求
 import pandas as pd
-
+import re
 
 def weather_crawler():
     # 22縣市逐3小時2天 未來鄉鎮預報
@@ -73,6 +73,11 @@ def weather_crawler():
 
     # 將降雨機率為 0 的值設為空格 " "
     AllData['降雨機率'] = AllData['降雨機率'].replace(0, " ")
+    
+    # 使用正則表達式來匹配並移除末尾的時區部分
+    AllData['開始時間'] = AllData['開始時間'].apply(lambda x: re.sub(r'\+(\d{2}):(\d{2})$', '', x))
+    AllData['結束時間'] = AllData['結束時間'].apply(lambda x: re.sub(r'\+(\d{2}):(\d{2})$', '', x))
+
 
     # 將 DataFrame 轉換成列表格式
     header = AllData.columns.tolist()
